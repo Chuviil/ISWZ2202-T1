@@ -7,4 +7,5 @@ public interface IUsuarioService {
     Usuario createUsuario(Usuario usuario);
     Usuario getUsuarioById(long id);
     Usuario deleteUsuarioById(long id);
+    Usuario updateUsuario(long id, Usuario usuario);
 }
