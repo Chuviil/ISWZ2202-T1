@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Iswz2202T1Application {
+public class ISWZSpringBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Iswz2202T1Application.class, args);
+        SpringApplication.run(ISWZSpringBootApplication.class, args);
     }
 
 }
