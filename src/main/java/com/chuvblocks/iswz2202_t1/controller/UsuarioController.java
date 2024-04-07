@@ -2,6 +2,7 @@ package com.chuvblocks.iswz2202_t1.controller;
 
 import com.chuvblocks.iswz2202_t1.model.Usuario;
 import com.chuvblocks.iswz2202_t1.repository.UsuarioRepository;
+import com.chuvblocks.iswz2202_t1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +14,25 @@ import java.util.List;
 @RequestMapping("/api")
 public class UsuarioController {
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UsuarioService usuarioService;
 
     @GetMapping("/usuarios")
-    public ResponseEntity<List<Usuario>> getAllUsuarios() {
+    public ResponseEntity<Iterable<Usuario>> getAllUsuarios() {
         try {
-            List<Usuario> usuarios = usuarioRepository.findAll();
-            return new ResponseEntity<>(usuarios, HttpStatus.OK);
+            Iterable<Usuario> _usuarios = usuarioService.getUsuarios();
+            return new ResponseEntity<>(_usuarios, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/usuarios/{id}")
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable long id) {
+        try {
+            Usuario _usuario = usuarioService.getUsuarioById(id);
+            if (_usuario == null)
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(_usuario, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -28,7 +41,7 @@ public class UsuarioController {
     @PostMapping("/usuarios")
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         try {
-            Usuario _usuario = usuarioRepository.save(new Usuario(usuario.getNombre()));
+            Usuario _usuario = usuarioService.createUsuario(usuario);
             return new ResponseEntity<>(_usuario, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
