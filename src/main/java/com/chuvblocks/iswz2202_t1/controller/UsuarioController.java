@@ -47,4 +47,17 @@ public class UsuarioController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @DeleteMapping("/usuarios/{id}")
+    public ResponseEntity<Usuario> deleteUsuarioById(@PathVariable long id){
+        try{
+            Usuario _usuario=usuarioService.deleteUsuarioById(id);
+            if(_usuario==null){
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(_usuario, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
