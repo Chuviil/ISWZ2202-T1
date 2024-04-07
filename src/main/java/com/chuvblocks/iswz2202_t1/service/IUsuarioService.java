@@ -6,5 +6,6 @@ public interface IUsuarioService {
     Iterable<Usuario> getUsuarios();
     Usuario createUsuario(Usuario usuario);
     Usuario getUsuarioById(long id);
+    Usuario deleteUsuarioById(long id);
     Usuario updateUsuario(long id, Usuario usuario);
 }
