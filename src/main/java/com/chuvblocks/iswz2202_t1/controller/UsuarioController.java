@@ -1,6 +1,7 @@
 package com.chuvblocks.iswz2202_t1.controller;
 
 import com.chuvblocks.iswz2202_t1.model.Usuario;
+import com.chuvblocks.iswz2202_t1.service.IUsuarioService;
 import com.chuvblocks.iswz2202_t1.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class UsuarioController {
     @Autowired
-    UsuarioService usuarioService;
+    IUsuarioService usuarioService;
 
     @GetMapping("/usuarios")
     public ResponseEntity<Iterable<Usuario>> getAllUsuarios() {
